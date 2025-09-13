@@ -724,6 +724,15 @@ function M.Status(state, config)
           folded = config.sections.stashes.folded,
           name = "stashes",
         },
+        -- not show_upstream_unmerged and show_recent and Section {
+        show_recent and Section {
+          title = SectionTitle { title = "Recent Commits", highlight = "NeogitRecentcommits" },
+          count = false,
+          render = SectionItemCommit,
+          items = state.recent.items,
+          folded = config.sections.recent.folded,
+          name = "recent",
+        },
         show_upstream_unmerged and Section {
           title = SectionTitleRemote {
             title = "Unmerged into",
@@ -747,14 +756,6 @@ function M.Status(state, config)
           items = state.pushRemote.unmerged.items,
           folded = config.sections.unmerged_pushRemote.folded,
           name = "pushRemote_unmerged",
-        },
-        not show_upstream_unmerged and show_recent and Section {
-          title = SectionTitle { title = "Recent Commits", highlight = "NeogitRecentcommits" },
-          count = false,
-          render = SectionItemCommit,
-          items = state.recent.items,
-          folded = config.sections.recent.folded,
-          name = "recent",
         },
         show_upstream_unpulled and Section {
           title = SectionTitleRemote {
